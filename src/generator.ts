@@ -26,7 +26,7 @@ export type PromptOptions = {
   testDir: string,
   installGitHubActions: boolean,
   language: 'JavaScript' | 'TypeScript',
-  framework?: 'react' | 'vue' | 'svelte' | 'solid' | undefined,
+  framework?: 'react' | 'vue' | 'svelte' | 'solid' | 'web' | 'angular' | undefined,
   installPlaywrightDependencies: boolean,
   installPlaywrightBrowsers: boolean,
 };
@@ -101,10 +101,12 @@ export class Generator {
         name: 'framework',
         message: 'Which framework do you use? (experimental)',
         choices: [
-          { name: 'react' },
-          { name: 'vue' },
-          { name: 'svelte' },
-          { name: 'solid' },
+          { name: 'react', message: 'React' },
+          { name: 'vue', message: 'Vue' },
+          { name: 'svelte', message: 'Svelte' },
+          { name: 'solid', message: 'Solid' },
+          { name: 'web', message: 'Web components' },
+          { name: 'angular', message: 'Angular' },
         ],
       },
       !this.options.ct && {
@@ -152,7 +154,11 @@ export class Generator {
     let ctPackageName;
     let installExamples = true;
     if (answers.framework) {
-      ctPackageName = `@playwright/experimental-ct-${answers.framework}`;
+      if (answers.framework === 'web' || answers.framework === 'angular') {
+        ctPackageName = `@sand4rt/experimental-ct-${answers.framework}`;
+      } else {
+        ctPackageName = `@playwright/experimental-ct-${answers.framework}`;
+      }
       installExamples = false;
       files.set(`playwright-ct.config.${fileExtension}`, executeTemplate(this._readAsset(`playwright-ct.config.${fileExtension}`), {
         testDir: answers.testDir || '',
