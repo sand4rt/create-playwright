@@ -26,7 +26,7 @@ export type PromptOptions = {
   testDir: string,
   installGitHubActions: boolean,
   language: 'JavaScript' | 'TypeScript',
-  framework?: 'react' | 'vue' | 'svelte' | 'solid' | 'web' | 'angular' | 'preact' | undefined,
+  framework?: 'react' | 'react17' | 'vue' | 'vue2' | 'svelte' | 'solid' | 'web' | 'angular' | 'preact' | undefined,
   installPlaywrightDependencies: boolean,
   installPlaywrightBrowsers: boolean,
 };
@@ -101,13 +101,15 @@ export class Generator {
         name: 'framework',
         message: 'Which framework do you use? (experimental)',
         choices: [
-          { name: 'react', message: 'React' },
-          { name: 'vue', message: 'Vue' },
-          { name: 'svelte', message: 'Svelte' },
-          { name: 'solid', message: 'Solid' },
           { name: 'web', message: 'Web components' },
           { name: 'angular', message: 'Angular' },
           { name: 'preact', message: 'Preact' },
+          { name: 'react', message: 'React 18' },
+          { name: 'react17', message: 'React 17' },
+          { name: 'vue', message: 'Vue 3' },
+          { name: 'vue2', message: 'Vue 2' },
+          { name: 'svelte', message: 'Svelte'  },
+          { name: 'solid', message: 'Solid'  },
         ],
       },
       !this.options.ct && {
