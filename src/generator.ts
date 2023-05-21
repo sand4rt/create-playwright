@@ -26,7 +26,7 @@ export type PromptOptions = {
   testDir: string,
   installGitHubActions: boolean,
   language: 'JavaScript' | 'TypeScript',
-  framework?: 'react' | 'vue' | 'svelte' | 'solid' | 'web' | 'angular' | undefined,
+  framework?: 'react' | 'vue' | 'svelte' | 'solid' | 'web' | 'angular' | 'preact' | undefined,
   installPlaywrightDependencies: boolean,
   installPlaywrightBrowsers: boolean,
 };
@@ -106,6 +106,7 @@ export class Generator {
           { name: 'svelte', message: 'Svelte' },
           { name: 'solid', message: 'Solid' },
           { name: 'web', message: 'Web components' },
+          { name: 'preact', message: 'Preact' },
           { name: 'angular', message: 'Angular' },
         ],
       },
@@ -156,6 +157,9 @@ export class Generator {
     if (answers.framework) {
       if (answers.framework === 'web' || answers.framework === 'angular') {
         ctPackageName = `@sand4rt/experimental-ct-${answers.framework}`;
+      }
+      else if (answers.framework === 'preact') {
+        ctPackageName = '@preact/playwright-ct';
       } else {
         ctPackageName = `@playwright/experimental-ct-${answers.framework}`;
       }
