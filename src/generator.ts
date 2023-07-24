@@ -106,8 +106,8 @@ export class Generator {
           { name: 'svelte', message: 'Svelte' },
           { name: 'solid', message: 'Solid' },
           { name: 'web', message: 'Web components' },
-          { name: 'preact', message: 'Preact' },
           { name: 'angular', message: 'Angular' },
+          { name: 'preact', message: 'Preact' },
         ],
       },
       !this.options.ct && {
